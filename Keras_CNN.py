@@ -61,7 +61,7 @@ train_x, val_x, train_y, val_y = train_test_split(train_x, train_y, test_size = 
 classifier = Sequential()
 
 # Adding a convolutional layer
-classifier.add(Conv2D(64,(3,3), padding = 'Same',activation = 'relu', kernel_initializer='he_uniform', kernel_regularizer=l2(l2_lambda), input_shape = (28,28,1)))
+classifier.add(Conv2D(64,(3,3), padding = 'Same',activation = 'relu', kernel_initializer='he_uniform', kernel_regularizer=l2(0.0001), input_shape = (28,28,1)))
 classifier.add(Conv2D(64,(3,3), padding = 'Same',activation = 'relu'))
 classifier.add(BatchNormalization())
 classifier.add(MaxPooling2D(2,2))
@@ -80,7 +80,7 @@ classifier.add(Flatten())
 classifier.add(Dense(128, activation = "relu"))
 classifier.add(Dense(128, activation = "relu"))
 classifier.add(Dropout(0.2))
-classifier.add(Dense(10, kernel_initializer='glorot_uniform', kernel_regularizer=l2(l2_lambda), activation = "softmax"))
+classifier.add(Dense(10, kernel_initializer='glorot_uniform', kernel_regularizer=l2(0.0001), activation = "softmax"))
 
 # Compiling the CNN
 classifier.compile(optimizer = 'Adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
